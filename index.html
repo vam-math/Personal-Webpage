@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dr. Vamanie Perumal | Decision Sciences &amp; AI, IIT Madras</title>
+<meta name="description" content="Dr. Vamanie Perumal — decision sciences and AI researcher at IIT Madras working on explainable AI, visual analytics, optimization and causal inference.">
+<meta property="og:title" content="Dr. Vamanie Perumal">
+<meta property="og:description" content="Decision sciences and AI researcher, IIT Madras. Explainable AI, visual analytics, optimization, causal inference.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1d2433;
+    --muted:#5b6475;
+    --line:#dde6e5;
+    --paper:#f7fafa;
+    --card:#ffffff;
+    --accent:#0e6e6e;      /* teal */
+    --accent-soft:#e2f1ef;
+    --accent-dark:#0a5050;
+    --max:1080px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth;scroll-padding-top:120px}
+  body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.65 Inter,system-ui,-apple-system,"Segoe UI",sans-serif}
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline}
+  h1,h2,h3{font-family:"Source Serif 4",Georgia,serif;line-height:1.25;margin:0}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+  .skip{position:absolute;left:-999px}
+  .skip:focus{left:12px;top:12px;background:#fff;padding:8px;z-index:100}
+
+  /* Header / tabs */
+  header.top{position:sticky;top:0;z-index:50;background:var(--accent-dark);color:#fff;box-shadow:0 1px 0 rgba(0,0,0,.08)}
+  header.top .bar{display:flex;align-items:center;justify-content:space-between;height:58px}
+  .brand{font-family:"Source Serif 4",serif;font-weight:700;font-size:1.2rem;color:#fff}
+  .brand:hover{text-decoration:none}
+  .tabbar{background:#fff;border-bottom:1px solid var(--line)}
+  .tabbar ul{list-style:none;margin:0;padding:0;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
+  .tabbar ul::-webkit-scrollbar{display:none}
+  .tabbar a{display:block;padding:13px 14px 11px;color:var(--muted);font-size:.92rem;font-weight:500;border-bottom:3px solid transparent;white-space:nowrap}
+  .tabbar a:hover{color:var(--accent);text-decoration:none}
+  .tabbar a.on{color:var(--accent);border-bottom-color:var(--accent);font-weight:600}
+  .menu-btn{display:none;background:none;border:1px solid rgba(255,255,255,.5);color:#fff;border-radius:6px;padding:6px 12px;font:inherit;cursor:pointer}
+  [data-panel][hidden]{display:none}
+  .panel-section{border-bottom:0}
+
+  /* Hero */
+  .hero{padding:56px 0 48px;background:linear-gradient(180deg,var(--accent-soft),var(--paper))}
+  .hero .wrap{display:grid;grid-template-columns:1fr 290px;gap:40px;align-items:start}
+  .eyebrow{color:var(--accent);font-weight:600;font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px}
+  .hero h1{font-size:2.6rem;margin-bottom:6px}
+  .hero .role{font-size:1.1rem;color:var(--muted);margin:0 0 20px}
+  .hero p.bio{margin:0 0 16px;max-width:62ch}
+  .roles{margin:18px 0 0;padding-left:18px}
+  .roles li{margin-bottom:4px}
+  .portrait{width:100%;height:300px;border-radius:8px;background:#fff;box-shadow:0 6px 24px rgba(14,110,110,.15);display:flex;align-items:center;justify-content:center;overflow:hidden;border:1px solid var(--line)}
+  .portrait{position:relative}
+  .portrait img{position:absolute;inset:0;z-index:1;width:100%;height:100%;object-fit:cover;object-position:center top;display:block}
+  .portrait .initials{font-family:"Source Serif 4",serif;font-size:4rem;color:var(--accent);font-weight:700}
+  .ids{margin-top:14px;display:flex;flex-direction:column;gap:6px;font-size:.9rem}
+  .ids a{display:flex;align-items:center;gap:8px}
+  .ids span.k{color:var(--muted);min-width:60px;flex-shrink:0}
+  .ids a{min-width:0;overflow-wrap:anywhere}
+  .hero .wrap > *{min-width:0}
+
+  /* Stats */
+  .stats{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-top:8px}
+  .stats div{background:#fff;border:1px solid var(--line);border-top:3px solid var(--accent);border-radius:8px;padding:16px}
+  .stats b{display:block;font-family:"Source Serif 4",serif;font-size:1.7rem;color:var(--accent);line-height:1.1}
+  .stats span{font-size:.85rem;color:var(--muted)}
+
+  /* Sections */
+  section{padding:48px 0 64px}
+  section h2{font-size:1.75rem;margin-bottom:6px}
+  .sub{color:var(--muted);margin:0 0 28px;max-width:70ch}
+  h3.group{font-size:1.15rem;margin:28px 0 12px;color:var(--ink)}
+  .grid{display:grid;gap:16px}
+  .g2{grid-template-columns:repeat(2,1fr)}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:18px 20px}
+  .card h4{margin:0 0 6px;font-size:1rem;font-family:"Source Serif 4",serif}
+  .card p{margin:0;color:var(--muted);font-size:.93rem}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none}
+  .chips li{background:var(--accent-soft);color:var(--accent);border-radius:999px;padding:5px 12px;font-size:.88rem;font-weight:500}
+
+  /* Publications */
+  ol.pubs{margin:0;padding-left:22px}
+  ol.pubs li{margin-bottom:14px;padding-left:4px}
+  .pub-title{font-weight:600}
+  .venue{font-style:italic}
+  .tag{display:inline-block;font-size:.72rem;font-weight:600;letter-spacing:.03em;text-transform:uppercase;padding:2px 8px;border-radius:4px;margin-left:6px;vertical-align:1px}
+  .tag.rev{background:#fff4dc;color:#8a5a00}
+  .tag.press{background:#e7f0fb;color:#1f4f8a}
+  .tag.award{background:#e9f6ec;color:#1f6b34}
+  .me{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:2px}
+  .note{color:var(--muted);font-size:.9rem}
+
+  /* Timeline */
+  .tl{list-style:none;margin:0;padding:0}
+  .tl li{display:grid;grid-template-columns:170px 1fr;gap:20px;padding:14px 0;border-top:1px solid var(--line)}
+  .tl li:first-child{border-top:0}
+  .tl .when{color:var(--muted);font-size:.9rem;font-variant-numeric:tabular-nums}
+  .tl .what strong{display:block}
+  .tl .what span{color:var(--muted);font-size:.94rem}
+
+  /* Media */
+  .filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
+  .filters button{font:inherit;font-size:.88rem;border:1px solid var(--line);background:#fff;color:var(--ink);padding:6px 14px;border-radius:999px;cursor:pointer}
+  .filters button.on{background:var(--accent);border-color:var(--accent);color:#fff}
+  .media{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+  .m{background:#fff;border:1px solid var(--line);border-radius:8px;padding:18px 20px;display:flex;flex-direction:column;gap:6px}
+  .m .outlet{font-size:.78rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--accent)}
+  .m h4{margin:0;font-family:"Source Serif 4",serif;font-size:1.05rem;line-height:1.35}
+  .m p{margin:0;color:var(--muted);font-size:.92rem}
+  .m a.go{margin-top:auto;padding-top:6px;font-size:.88rem;font-weight:600}
+  .m[hidden]{display:none}
+
+  /* Gallery embed */
+  .embed{position:relative;width:100%;padding-top:56.25%;border-radius:10px;overflow:hidden;background:#fff;border:1px solid var(--line);box-shadow:0 4px 18px rgba(14,110,110,.08)}
+  .embed iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+
+  /* Contact / footer */
+  footer{padding:28px 0 40px;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);background:#fff}
+  footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px}
+
+  @media (max-width:900px){
+    .tabbar{display:none}
+    .tabbar.open{display:block}
+    .tabbar ul{flex-direction:column;gap:0;padding:6px 0}
+    .tabbar a{border-bottom:0;border-left:3px solid transparent;padding:10px 12px}
+    .tabbar a.on{border-left-color:var(--accent)}
+    .menu-btn{display:block}
+    .hero .wrap{grid-template-columns:1fr}
+    .hero .side{order:-1;display:flex;flex-direction:column;gap:16px;align-items:flex-start}
+    .portrait{width:120px;height:140px}
+    .portrait .initials{font-size:2.2rem}
+    .ids{margin-top:0}
+    .g2,.g3,.media{grid-template-columns:1fr}
+    .stats{grid-template-columns:repeat(2,1fr)}
+    .tl li{grid-template-columns:1fr;gap:2px}
+    .hero h1{font-size:2rem}
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top">
+  <div class="wrap bar">
+    <a class="brand" href="#about">Dr. Vamanie Perumal</a>
+    <button class="menu-btn" aria-expanded="false" aria-controls="tabs">Menu</button>
+  </div>
+  <div class="tabbar">
+    <nav class="wrap" aria-label="Sections">
+      <ul id="tabs" role="tablist">
+        <li><a href="#about" data-tab="about">About</a></li>
+        <li><a href="#research" data-tab="research">Research</a></li>
+        <li><a href="#publications" data-tab="publications">Publications</a></li>
+        <li><a href="#experience" data-tab="experience">Experience</a></li>
+        <li><a href="#teaching" data-tab="teaching">Teaching</a></li>
+        <li><a href="#service" data-tab="service">Service</a></li>
+        <li><a href="#awards" data-tab="awards">Awards</a></li>
+        <li><a href="#media" data-tab="media">Media</a></li>
+        <li><a href="#gallery" data-tab="gallery">Gallery</a></li>
+        <li><a href="#contact" data-tab="contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ===================== HERO ===================== -->
+<div class="hero" id="about" data-panel="about">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">Indian Institute of Technology Madras</div>
+      <h1>Dr. Vamanie Perumal</h1>
+      <p class="role">Decision Sciences &amp; Artificial Intelligence Researcher</p>
+      <p class="bio">I develop interpretable computational approaches to prediction, counterfactual analysis, performance assessment and resource allocation, spanning explainable AI, visual analytics, optimization and causal inference. My applications include online advertising, transportation, emergency medical services, energy systems and entrepreneurial ecosystems.</p>
+      <p class="bio">My PhD at IIT Madras (Engineering Design) investigated online advertising effectiveness through geo-experimental design. My work combines funded research, academic–industry collaboration, mentoring and teaching.</p>
+      <ul class="roles">
+        <li>Lead Researcher, Visualization &amp; Analytics — CREST, IIT Madras</li>
+        <li>Lead Researcher, Data Science / ML / AI — CoE AI4NetZero, IIT Madras</li>
+        <li>India Rise Fellow — Gupta-Klinsky India Institute, Johns Hopkins University (2025–2027)</li>
+        <li>Founder, Creasemble — STEM &amp; creativity education (2014–present)</li>
+      </ul>
+    </div>
+    <aside class="side">
+      <div class="portrait">
+        <!-- Add a photo named photo.jpg next to this file; initials show until then -->
+        <img src="photo.jpg" alt="Portrait of Dr. Vamanie Perumal" onerror="this.remove()">
+        <span class="initials" aria-hidden="true">VP</span>
+      </div>
+      <div class="ids">
+        <a href="https://scholar.google.com/citations?user=tM9n07EAAAAJ&amp;hl=en" target="_blank" rel="noopener"><span class="k">Scholar</span>Google Scholar</a>
+        <a href="https://orcid.org/0009-0002-7479-3747" target="_blank" rel="noopener"><span class="k">ORCID</span>0009-0002-7479-3747</a>
+        <a href="https://www.scopus.com/authid/detail.uri?authorId=59787226100" target="_blank" rel="noopener"><span class="k">Scopus</span>59787226100</a>
+        <a href="https://www.behance.net/creasembleandco" target="_blank" rel="noopener"><span class="k">Portfolio</span>Data viz (Behance)</a>
+        <a href="mailto:perumal.vamanie@gmail.com"><span class="k">Email</span>perumal.vamanie@gmail.com</a>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<section id="glance" data-panel="about" style="padding-top:8px">
+  <div class="wrap">
+    <div class="stats">
+      <div><b>11</b><span>publications, published or in press</span></div>
+      <div><b>₹30L</b><span>in research grants as Co-PI / Project Lead</span></div>
+      <div><b>16</b><span>large real-world datasets analysed</span></div>
+      <div><b>40+</b><span>students mentored in research</span></div>
+      <div><b>25+</b><span>invited talks and panels</span></div>
+    </div>
+
+    <h3 class="group">Recent highlights</h3>
+    <ul class="tl">
+      <li><div class="when">2026</div><div class="what"><strong>Co-PI on benchmark datasets for AI-driven building decarbonization</strong><span>Robert Bosch Centre for Data Science and AI, IIT Madras</span></div></li>
+      <li><div class="when">2026</div><div class="what"><strong><em>The Startup Decade, 2016–2025</em> featured in The Hindu and BusinessLine</strong><span>Data stories built on her CREST startup-performance research — <a href="#media">see media</a></span></div></li>
+      <li><div class="when">2026</div><div class="what"><strong>Papers in <em>Transport Policy</em> and <em>ACS Sustainable Resource Management</em></strong><span>Indian Railways benchmarking; ML prediction of uranium in groundwater</span></div></li>
+      <li><div class="when">2025</div><div class="what"><strong>India Rise Fellow, Johns Hopkins University</strong><span>Gupta-Klinsky India Institute, 2025–2027</span></div></li>
+      <li><div class="when">2025</div><div class="what"><strong>Asia Young Women Rising Tech Stars — Top 10</strong><span>Asia Women Tech Leaders Awards, Singapore</span></div></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===================== RESEARCH ===================== -->
+<section id="research" data-panel="research">
+  <div class="wrap">
+    <h2>Research</h2>
+    <p class="sub">Interpretable, data-driven decision support for complex operational systems.</p>
+    <ul class="chips">
+      <li>Explainable &amp; Interpretable AI</li>
+      <li>Visual Analytics &amp; Data Visualization</li>
+      <li>Human–AI Decision Support</li>
+      <li>Operations &amp; Decision Sciences</li>
+      <li>Multi-objective &amp; Combinatorial Optimization</li>
+      <li>Causal Inference &amp; Experimental Design</li>
+      <li>Operational Performance Benchmarking</li>
+      <li>AI &amp; ML for Operations</li>
+    </ul>
+
+    <h3 class="group">Application areas</h3>
+    <div class="grid g3">
+      <div class="card"><h4>Online advertising</h4><p>Geo-experiments, causal attribution, lift prediction and counterfactual estimation on billion-scale retail and advertising time series.</p></div>
+      <div class="card"><h4>Transportation &amp; public services</h4><p>Multistage performance benchmarking of Indian Railways (800+ routes), Tamil Nadu bus transport and emergency medical services (3.59M call records).</p></div>
+      <div class="card"><h4>Energy &amp; buildings</h4><p>Forecasting, anomaly detection and XAI-driven chiller-plant optimization on multisite HVAC data for building decarbonization.</p></div>
+      <div class="card"><h4>Water &amp; health</h4><p>Machine-learning prediction of uranium in Punjab groundwater; Raman spectroscopy + ML for authenticating herbal medicines.</p></div>
+      <div class="card"><h4>Industrial AI</h4><p>Vision-language models and few-shot learning for bearing-defect detection; LLMs for automated design and testing of control panels.</p></div>
+      <div class="card"><h4>Entrepreneurial ecosystems</h4><p>Decade-long analysis and visualization of Indian startup performance with CREST, YNOS and MeitY.</p></div>
+    </div>
+
+    <h3 class="group">Selected datasets worked with</h3>
+    <p class="note">Measured Inc. (advertising &amp; retail) · Titan Watches (5 yrs manufacturing) · Government of Punjab (8 yrs water quality) · Eureka Forbes (used filter cartridges) · Indian Railways · Tamil Nadu bus transport (7 yrs) · Schaeffler (bearing images) · Multisite building HVAC · Electrical control-panel diagrams · People's Water Data · Herbal-medicine Raman spectra · Tamil Nadu EMS · TN Group I examinations · Indian startup ecosystem (10 yrs) · MeitY startup programmes · Film-derived facial-difference data</p>
+  </div>
+</section>
+
+<!-- ===================== PUBLICATIONS ===================== -->
+<section id="publications" data-panel="publications">
+  <div class="wrap">
+    <h2>Publications</h2>
+    <p class="sub">For the latest list, see <a href="https://scholar.google.com/citations?user=tM9n07EAAAAJ&amp;hl=en" target="_blank" rel="noopener">Google Scholar</a>.</p>
+
+    <h3 class="group">Journal articles</h3>
+    <ol class="pubs">
+      <li><span class="me">Perumal, V.</span>, Sudhir, S., Nayak, T., &amp; Pradeep, T. (2026). <span class="pub-title">Predicting uranium in Punjab's groundwater using common anions: A machine learning approach.</span> <span class="venue">ACS Sustainable Resource Management</span>, 3(4), 998–1008. <a href="https://doi.org/10.1021/acssusresmgt.5c00505" target="_blank" rel="noopener">DOI</a> <span class="note">(equal contribution)</span></li>
+      <li><span class="me">Perumal, V.</span>, &amp; Paramasivan, K. (2026). <span class="pub-title">Operational multistage nonlinear inefficiency and regime exploration — An empirical benchmarking of Indian Railways.</span> <span class="venue">Transport Policy</span>, 186, 104232. <a href="https://doi.org/10.1016/j.tranpol.2026.104232" target="_blank" rel="noopener">DOI</a></li>
+      <li><span class="me">Perumal, V.</span>, Paramasivan, K., &amp; Tiwari, R. (2026). <span class="pub-title">Diagnosing inequity in emergency medical transport: A graph-based counterfactual framework for multi-stage performance benchmarking.</span><span class="tag rev">Under review</span></li>
+      <li>Manna, S., <span class="me">Perumal, V.</span>, Nath, A., Barik, A. K., Chidangil, S., &amp; Pradeep, T. (2026). <span class="pub-title">Rapid, non-destructive identification and authentication of commercial herbal medicines using Raman spectroscopy and machine learning.</span><span class="tag rev">Under review</span></li>
+      <li><span class="me">Perumal, V.</span> (2026). <span class="pub-title">Decision support for districting applications: Resolving equifinality in Pareto-optimal graph partitions using a genotype–phenotype self-organizing map.</span><span class="tag rev">Under review</span></li>
+    </ol>
+
+    <h3 class="group">Books, chapters &amp; dissertation</h3>
+    <ol class="pubs">
+      <li><span class="me">Perumal, V.</span>, Rajan, T., Chinni, C., Gupta, S., Devadass, P., &amp; Kireeti, K. (2026). <span class="pub-title">The Startup Decade, 2016 to 2025.</span> <span class="venue">Zenodo</span>. <a href="https://doi.org/10.5281/zenodo.20577942" target="_blank" rel="noopener">DOI</a></li>
+      <li><span class="me">Perumal, V.</span>, Chandrasekharan, B., &amp; Barnabas, N. D. (2026). <span class="pub-title">Multimodal approach to spare part identification for Industry 4.0.</span> In <span class="venue">Emerging Trends in Innovation, Sustainability, and Digital Transformation</span>, Routledge. <span class="tag rev">In press</span> <span class="note">(with Schaeffler Group, USA)</span></li>
+      <li><span class="me">Perumal, V.</span>, Lim, A., &amp; Ramu, P. (2026). <span class="pub-title">PIGEO: Privacy preserving and interference aware geo-experimental framework for online advertising.</span> In <span class="venue">Dynamics of Digital Media Consumption Behaviour</span>, Emerald Advanced Management series. <span class="tag rev">In press</span></li>
+      <li><span class="me">Perumal, V.</span> (2025). <span class="pub-title">Measurement of online advertising effectiveness using a geo-experimental framework.</span> Doctoral dissertation, Indian Institute of Technology Madras.</li>
+    </ol>
+
+    <h3 class="group">Conference proceedings</h3>
+    <ol class="pubs">
+      <li>Singla, A., &amp; <span class="me">Perumal, V.</span> (2026). <span class="pub-title">A novel, multistep neural network approach to improve anomaly detection in online operational status.</span> <span class="venue">IEEE AAIML 2026</span>, Tokyo, Japan. <a href="https://doi.org/10.1109/AAIML67890.2026.11498211" target="_blank" rel="noopener">DOI</a> <span class="tag award">Best Paper</span> <span class="note">(mentored high-school first author)</span></li>
+      <li>Chandrasekharan, B., &amp; <span class="me">Perumal, V.</span> (2025). <span class="pub-title">Evaluation of few-shot learning with vision-language models for needle-bearing defect detection.</span> <span class="venue">IEEE SoutheastCon 2025</span>, Concord, NC, USA, pp. 1300–1308. <a href="https://doi.org/10.1109/SoutheastCon56624.2025.10971495" target="_blank" rel="noopener">DOI</a></li>
+      <li>He, J., <span class="me">Perumal, V.</span>, &amp; Jain, I. (2025). <span class="pub-title">An evaluation of vision-language models on graph reconstruction.</span> <span class="venue">VISxGenAI Workshop, IEEE VIS 2025</span>, Vienna, Austria. <a href="https://visxgenai.github.io/subs-2025/4565/4565-doc.pdf" target="_blank" rel="noopener">Paper</a> <span class="note">(mentored high-school first author)</span></li>
+      <li><span class="me">Perumal, V.</span>, &amp; Paramasivan, K. (2025). <span class="pub-title">Performance benchmarking of Tamil Nadu's intra-state bus network: Evidence from data envelopment analysis.</span> <span class="venue">11th IEEE DSS 2025</span>, Exeter, UK, pp. 926–931. <a href="https://doi.org/10.1109/HPCC67675.2025.00136" target="_blank" rel="noopener">DOI</a></li>
+      <li><span class="me">Perumal, V.</span>, Jain, J., Balasubramaniam, S., &amp; Seshadri, S. (2025). <span class="pub-title">XAI for democratization of deep learning-led chiller plant performance optimization for commercial buildings.</span> <span class="venue">Energise 2025</span>, Panchgani, India. <a href="https://doi.org/10.5281/zenodo.20577581" target="_blank" rel="noopener">DOI</a></li>
+      <li>Chandrasekharan, B., &amp; <span class="me">Perumal, V.</span> (2024). <span class="pub-title">Novel approach to needle bearing fault detection using CLIP fine-tuning.</span> <span class="venue">iNCMDAO 2024</span>, IISc Bengaluru. Springer Nature, pp. 253–262. <a href="https://doi.org/10.1007/978-981-95-1723-7_21" target="_blank" rel="noopener">DOI</a></li>
+    </ol>
+
+    <h3 class="group">Selected conference presentations</h3>
+    <ol class="pubs">
+      <li><span class="me">Perumal, V.</span>, Jain, J., &amp; Seshadri, S. (2025). Enhancing HVAC performance prediction through transfer learning. <span class="venue">WE Local Bengaluru 2025</span>, Society of Women Engineers.</li>
+      <li><span class="me">Perumal, V.</span>, Jain, J., Balasubramaniam, S., Singh, J., &amp; Seshadri, S. (2024). Electrical consumption forecasting in commercial buildings: IoT data preparation, modeling &amp; evaluation. <span class="venue">5th Intl. Emerging Research in Civil, Aeronautical and Mechanical Engineering</span>.</li>
+      <li><span class="me">Perumal, V.</span>, &amp; Ramu, P. (2024). XAI explanations for counterfactual prediction in online advertising. <span class="venue">57th ORSI Annual Convention</span>, IIT Bombay.</li>
+      <li><span class="me">Perumal, V.</span> (2024). Cellular automata based graph partitioning algorithm for districting problems. <span class="venue">MAA MathFest 2024</span>.</li>
+      <li><span class="me">Perumal, V.</span>, &amp; Ramu, P. (2024). Estimation of online advertising effectiveness using a coarsened exact matching framework. <span class="venue">33rd European Conference on Operational Research (EURO 2024)</span>, Copenhagen.</li>
+      <li><span class="me">Perumal, V.</span>, &amp; Ramu, P. (2024). Visualization of multivariate time series data in online advertising. <span class="venue">SWE Local Conference</span>, Bengaluru.</li>
+      <li><span class="me">Perumal, V.</span>, &amp; Ramu, P. (2024). Identification of sales patterns and anomalies using topological data analysis in online advertising. <span class="venue">3rd Intl. Marketing Research Conference</span>, IIM Shillong.</li>
+      <li><span class="me">Perumal, V.</span>, &amp; Ramu, P. (2024). Motif analysis in online advertising using data binning and self-organizing maps. <span class="venue">9th PAN IIM World Management Conference</span>, IIM Sambalpur.</li>
+      <li><span class="me">Perumal, V.</span>, &amp; Ramu, P. (2023). An online clustering approach using Pareto solutions for industrial data. <span class="venue">6th NCMDAO</span>, IIT Guwahati.</li>
+      <li>Dubey, P., <span class="me">Perumal, V.</span>, &amp; Ramu, P. (2023). Online fault detection in machine parts using motif discovery and dynamic time warping. <span class="venue">16th World Congress on Structural and Multidisciplinary Optimization</span>, Dublin.</li>
+      <li><span class="me">Perumal, V.</span> (2019). Design of strong and tough silk composites for engineering applications. <span class="venue">APSRT 2019</span>, IIT Kharagpur.</li>
+      <li><span class="me">Perumal, V.</span> (2009). Microbial fuel cells. <span class="venue">Intl. Symposium on Alternative Energy Strategies with Biomass</span>.</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ===================== PROJECTS ===================== -->
+<section id="projects" data-panel="research">
+  <div class="wrap">
+    <h2>Funded projects &amp; grants</h2>
+    <p class="sub">Research grants and competitive travel support.</p>
+    <div class="grid g2">
+      <div class="card"><h4>Benchmark datasets to enable AI-driven decarbonization of Indian buildings</h4><p>Co-Principal Investigator · Robert Bosch Centre for Data Science and AI, IIT Madras · Jan 2026–present · ₹15 lakh</p></div>
+      <div class="card"><h4>Leveraging GPT and LLMs for automated design, verification &amp; testing of control panels</h4><p>Project Lead · Wadhwani School of Data Science and AI, IIT Madras · Nov 2025–present · ₹15 lakh</p></div>
+      <div class="card"><h4>Performance benchmarking for Indian Railways and Tamil Nadu bus transport</h4><p>Conference travel grant · Office of Global Engagement, IIT Madras · Aug 2025 · ₹1 lakh</p></div>
+      <div class="card"><h4>Estimation of statistical twins for measuring online advertising effectiveness</h4><p>Conference travel grant · Ministry of Human Resource Development · Jul 2025 · ₹2.10 lakh</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== EXPERIENCE ===================== -->
+<section id="experience" data-panel="experience">
+  <div class="wrap">
+    <h2>Education &amp; experience</h2>
+
+    <h3 class="group">Education</h3>
+    <ul class="tl">
+      <li><div class="when">2025–2027</div><div class="what"><strong>India Rise Fellow — Gupta-Klinsky India Institute, Johns Hopkins University</strong><span>Leadership and Entrepreneurship Programme</span></div></li>
+      <li><div class="when">2020–2025</div><div class="what"><strong>PhD, Engineering Design — IIT Madras</strong><span>Thesis: Measurement of online advertising effectiveness using a geo-experimental framework. CGPA 9.17/10. Supported by MHRD and Measured Inc., USA.</span></div></li>
+      <li><div class="when">2017–2019</div><div class="what"><strong>MTech, Materials Engineering — Amrita University</strong><span>CGPA 9.29/10. Research on data-driven composite optimization, funded by IIT Madras.</span></div></li>
+      <li><div class="when">2012–2013</div><div class="what"><strong>Diploma in Social Entrepreneurship — CSIM, Chennai</strong></div></li>
+      <li><div class="when">2008–2012</div><div class="what"><strong>BTech, Biotechnology — PSG College of Technology</strong><span>CGPA 8.84/10. Gold Medal, Best Outgoing Student. Thesis funded by the Mechanobiology Institute, NUS.</span></div></li>
+    </ul>
+
+    <h3 class="group">Research &amp; industry</h3>
+    <ul class="tl">
+      <li><div class="when">Jan 2026–present</div><div class="what"><strong>Lead Researcher, Visualization &amp; Analytics — CREST, IIT Madras</strong><span>Startup-performance reports with YNOS, including <em>The Startup Decade</em> and a report for MeitY on Indian startup growth, 2016–2025.</span></div></li>
+      <li><div class="when">Sep 2024–present</div><div class="what"><strong>Lead Researcher, Data Science / ML / AI — CoE AI4NetZero, IIT Madras (EnergyETA)</strong><span>Energy forecasting, anomaly detection and operational recommendations; one of 12 national finalists at ENTICE 2025.</span></div></li>
+      <li><div class="when">Apr–Nov 2025</div><div class="what"><strong>AI Research Contributor — Outlier &amp; Scale AI, USA (Human Frontier Project)</strong><span>Developed and validated 200+ advanced challenge problems for benchmarking AI models.</span></div></li>
+      <li><div class="when">Jul–Sep 2025</div><div class="what"><strong>Data Science Consultant</strong><span>Agentic AI statistical methods and automated LLM-based reporting workflows.</span></div></li>
+      <li><div class="when">2019–2024</div><div class="what"><strong>Research Scientist, AI / Causal Inference / Optimization — Measured Inc., USA</strong><span>ML and causal attribution models for large-scale advertising data, lift prediction and experimental design for global clients.</span></div></li>
+      <li><div class="when">2019–2020</div><div class="what"><strong>Project Associate — IIT Madras &amp; Titan Watches</strong><span>Statistical models to classify defects across 30+ watch-assembly components.</span></div></li>
+      <li><div class="when">2016–2017</div><div class="what"><strong>Visiting Faculty — Srishti Institute of Art, Design and Technology</strong><span>Interdisciplinary STEM and creativity modules for 100+ UG/PG students.</span></div></li>
+      <li><div class="when">2016</div><div class="what"><strong>Research Scientist — Achira Labs</strong><span>Optimized microfluidics-based diagnostic assays, cutting troubleshooting time by 30%.</span></div></li>
+      <li><div class="when">2012–2013</div><div class="what"><strong>Research Student — Mechanobiology Institute, National University of Singapore</strong><span>Cell migration and microenvironment engineering.</span></div></li>
+      <li><div class="when">2014–present</div><div class="what"><strong>Founder — Creasemble</strong><span>Educational initiative combining STEM and creativity; 500+ creators, 10+ partner education startups.</span></div></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===================== TEACHING ===================== -->
+<section id="teaching" data-panel="teaching">
+  <div class="wrap">
+    <h2>Teaching, mentoring &amp; talks</h2>
+    <div class="grid g2">
+      <div class="card">
+        <h4>Teaching</h4>
+        <p>Visiting Faculty, Srishti Institute (UG/PG, 1 semester) · TA, Kenyon–IITM Technical &amp; Science Writing Workshop (PhD scholars &amp; faculty, 2 editions) · TA, <em>Let's Play to Learn</em>, IIT Madras · TA, Advanced Data-driven Marketing Measurement, M Squared Club, USA · TA, Engineering Optimization &amp; Surrogates, Trane Technologies · Resource Person, SPARC Workshop on AI for Science, IIT Madras · Instructor, AI in Energy workshop</p>
+      </div>
+      <div class="card">
+        <h4>Mentoring</h4>
+        <p>30+ bachelor's/master's students and 10+ U.S. high-school students in research, two of whose papers reached IEEE venues (one a Best Paper). Entrepreneurship mentor at WE Hub, Government of Telangana; career mentor with Bodhbridge.</p>
+      </div>
+      <div class="card">
+        <h4>Workshops &amp; outreach</h4>
+        <p>Shaastra (IIT Madras) workshops on Creativity in Geometry, Creative Coding and the Art of Data Visualization · Sankalp / IIT for Villages mathematics outreach for 100+ rural learners · 50+ Creasemble workshops reaching 500+ learners.</p>
+      </div>
+      <div class="card">
+        <h4>Invited talks &amp; panels (25+)</h4>
+        <p>IEEE WIE Madras (DataWIE) · St. Joseph's College of Engineering · Amrita University · SRM / SWE · Apollo Tyres R&amp;D · Amrita Center for Entrepreneurship · Jeppiaar Institute of Technology · Rajalakshmi Engineering College · IEEE Kochi Hub · Sri Chaitanya Future Pathways</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SERVICE ===================== -->
+<section id="service" data-panel="service">
+  <div class="wrap">
+    <h2>Service &amp; leadership</h2>
+    <p class="sub">Institutional leadership, professional service and evaluation roles.</p>
+    <div class="grid g2">
+      <div class="card"><h4>Research Affairs Secretary, IIT Madras</h4><p>Represented 5,000+ MS and PhD scholars; the first and only woman scholar nominated twice for the role. Worked with the Director, deans and institute administration.</p></div>
+      <div class="card"><h4>Research Affairs team leadership</h4><p>Led a four-tier team of 300+ members across five verticals, including the 10th Research Scholars' festival.</p></div>
+      <div class="card"><h4>President, IIT Madras Chapter, Society of Women Engineers</h4><p>Professional leadership and engagement supporting women in STEM.</p></div>
+      <div class="card"><h4>G20 First Education Working Group Meeting</h4><p>Administrative coordination at IIT Madras Research Park.</p></div>
+      <div class="card"><h4>Infinitea at Insti</h4><p>Eight-session live series with researchers and experts on research careers and life after a research degree.</p></div>
+      <div class="card"><h4>Entrepreneurship mentoring — WE Hub, Government of Telangana</h4><p>Problem framing, AI adoption and research thinking for women entrepreneurs and innovators.</p></div>
+    </div>
+
+    <h3 class="group">Jury &amp; evaluation</h3>
+    <ul class="tl">
+      <li><div class="when">2025</div><div class="what"><strong>Smart India Hackathon 2025</strong><span>Invited judge / reviewer for Ministry of Jal Shakti and Ministry of Coal problem areas, Chennai Nodal Centre</span></div></li>
+      <li><div class="when">—</div><div class="what"><strong>TANCAM Industrial Impact Hackathon</strong><span>Invited judge / reviewer, Government of Tamil Nadu</span></div></li>
+      <li><div class="when">—</div><div class="what"><strong>Shiv Nadar University Hackathon</strong><span>Invited jury member</span></div></li>
+    </ul>
+
+    <h3 class="group">Professional development</h3>
+    <p class="note">Game Design for Education, Kanimuni, IIT Guwahati · Film Making Workshop, Science Media Centre, IISER Pune · Effective Science Communication, ComSciCon (University of Virginia chapter) · High-End Workshop on Stochastic Modeling, ISM Dhanbad (SERB-DST) · Summer School in Large Scale Optimization, IIM Ahmedabad &amp; IIT Roorkee · Paper Development Workshop, IIM Shillong · Women Entrepreneurship, IIM Bangalore · Social Entrepreneurship, CSIM Chennai</p>
+  </div>
+</section>
+
+<!-- ===================== AWARDS ===================== -->
+<section id="awards" data-panel="awards">
+  <div class="wrap">
+    <h2>Awards &amp; fellowships</h2>
+    <p class="sub">Fellowships, honours and competitive recognition.</p>
+    <ul class="tl">
+      <li><div class="when">2025–2027</div><div class="what"><strong>India Rise Fellowship</strong><span>Gupta-Klinsky India Institute, Johns Hopkins University — Leadership and Entrepreneurship Programme</span></div></li>
+      <li><div class="when">2025</div><div class="what"><strong>Asia Women Tech Leaders Award, Singapore</strong><span>Selected among 10 in the Asia Young Women Rising Tech Stars category; Rainmaker Group</span></div></li>
+      <li><div class="when">2025</div><div class="what"><strong>ENTICE 2025 — national finalist</strong><span>One of 12 national finalists for an AI-driven energy solutions pitch; Global Energy Alliance for People and Planet</span></div></li>
+      <li><div class="when">2026</div><div class="what"><strong>Best Paper Award (as mentor), IEEE AAIML 2026</strong><span>Won by her mentored high-school first author, Tokyo</span></div></li>
+      <li><div class="when">—</div><div class="what"><strong>NABARD–Dalberg National Climate Stack Innovation Challenge</strong><span>Advanced to Stage 2</span></div></li>
+      <li><div class="when">—</div><div class="what"><strong>APJ Abdul Kalam Award</strong><span>Young Innovator &amp; Teacher under 30 — All India Ramanujam Mathematics Club</span></div></li>
+      <li><div class="when">—</div><div class="what"><strong>Visionary Women Award</strong><span>Women Entrepreneurship Development Organisation</span></div></li>
+      <li><div class="when">—</div><div class="what"><strong>Suyasakthi Viruthugal — Women Achievers</strong><span>Selected among 50 awardees from 2,500+ applicants; Brand Avatar</span></div></li>
+      <li><div class="when">2019</div><div class="what"><strong>Working Women Achiever Award</strong><span>Selected among 100 awardees; Breaking Stereotype category, Ooruni Foundation</span></div></li>
+      <li><div class="when">2017</div><div class="what"><strong>Hackathon Prize, Forge Accelerator</strong><span>Microfluidic cancer-detection device; one of 18 Top Ideas Worth Prototyping (₹25,000)</span></div></li>
+      <li><div class="when">2012</div><div class="what"><strong>Gold Medal — Best Outgoing Student</strong><span>PSG College of Technology</span></div></li>
+      <li><div class="when">2011</div><div class="what"><strong>Summer Research Fellowship</strong><span>Indian Academy of Sciences — Centre for DNA Fingerprinting and Diagnostics</span></div></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===================== MEDIA ===================== -->
+<section id="media" data-panel="media">
+  <div class="wrap">
+    <h2>Media coverage</h2>
+    <p class="sub">Press, data stories, features and talks.</p>
+
+    <div class="filters" role="group" aria-label="Filter media">
+      <button class="on" data-f="all">All</button>
+      <button data-f="press">Press &amp; data stories</button>
+      <button data-f="recognition">Recognition</button>
+      <button data-f="writing">Writing &amp; interviews</button>
+      <button data-f="talks">Talks &amp; events</button>
+    </div>
+
+    <div class="media" id="mediaGrid">
+
+      <!-- Press & data stories -->
+      <article class="m" data-c="press">
+        <div class="outlet">The Hindu · Data</div>
+        <h4>How India scaled its startup industry from 2016 to 2025</h4>
+        <p>Data-led story drawing on <em>The Startup Decade</em> report, tracing a decade of growth in India's startup ecosystem.</p>
+        <a class="go" href="https://www.thehindu.com/data/how-india-scaled-its-startup-industry-from-2016-to-2025/article71061231.ece" target="_blank" rel="noopener">Read article →</a>
+      </article>
+      <article class="m" data-c="press">
+        <div class="outlet">BusinessLine · Data Focus</div>
+        <h4>The sectors dominating India's start-up landscape</h4>
+        <p>Sector-wise analysis of where Indian startups are concentrated, based on the startup-performance research at CREST, IIT Madras.</p>
+        <a class="go" href="https://www.thehindubusinessline.com/data-stories/data-focus/the-sectors-dominating-indias-start-up-landscape/article71088788.ece" target="_blank" rel="noopener">Read article →</a>
+      </article>
+      <article class="m" data-c="press">
+        <div class="outlet">BusinessLine · Data Focus</div>
+        <h4>Growing importance of debt funding for Indian start-ups</h4>
+        <p>Data story on the rising share of debt in startup financing, from the same decade-long dataset.</p>
+        <a class="go" href="https://www.thehindubusinessline.com/data-stories/data-focus/growing-importance-of-debt-funding-for-indian-start-ups/article71202228.ece" target="_blank" rel="noopener">Read article →</a>
+      </article>
+      <article class="m" data-c="press">
+        <div class="outlet">The Hindu</div>
+        <h4>IIT Madras holds month-long research scholar festival</h4>
+        <p>Coverage of the 10th Research Scholars' Day festival at IIT Madras, organised while serving as Research Affairs Secretary.</p>
+        <a class="go" href="https://www.thehindu.com/news/national/tamil-nadu/iit-madras-holds-month-long-research-scholar-festival/article65323814.ece" target="_blank" rel="noopener">Read article →</a>
+      </article>
+      <article class="m" data-c="press">
+        <div class="outlet">India Today</div>
+        <h4>IIT Madras celebrates 10th edition of Research Scholars' festival</h4>
+        <p>National coverage of the month-long scholars' festival and its programme of research and cultural events.</p>
+        <a class="go" href="https://www.indiatoday.in/education-today/news/story/iit-madras-celebrates-10th-edition-of-research-scholars-festival-1937034-2022-04-13" target="_blank" rel="noopener">Read article →</a>
+      </article>
+      <article class="m" data-c="press">
+        <div class="outlet">News18</div>
+        <h4>IIT Madras conducts research scholars' festival to encourage exchange of ideas</h4>
+        <p>Report on the festival's aim of fostering interdisciplinary exchange among research scholars.</p>
+        <a class="go" href="https://www.news18.com/news/education-career/iit-madras-conducts-research-scholars-festival-to-encourage-exchange-of-ideas-4977439.html" target="_blank" rel="noopener">Read article →</a>
+      </article>
+      <article class="m" data-c="press">
+        <div class="outlet">Skill Outlook</div>
+        <h4>IIT Madras celebrates 10th edition of Research Scholars' festival</h4>
+        <p>Education-sector coverage of the 2022 Research Scholars' festival at IIT Madras.</p>
+        <a class="go" href="https://skilloutlook.com/education/iit-madras-celebrates-10th-edition-of-research-scholars-festival" target="_blank" rel="noopener">Read article →</a>
+      </article>
+
+      <!-- Recognition -->
+      <article class="m" data-c="recognition">
+        <div class="outlet">India Rise Fellowship · Johns Hopkins</div>
+        <h4>Fellow profile: Vamanie Perumal</h4>
+        <p>Official profile as an India Rise Fellow of the Gupta-Klinsky India Institute, Johns Hopkins University (2025–2027).</p>
+        <a class="go" href="https://indiarisefellowship.in/team/vamanie-perumal/" target="_blank" rel="noopener">View profile →</a>
+      </article>
+      <article class="m" data-c="recognition">
+        <div class="outlet">YouTube · India Rise Fellowship</div>
+        <h4>India Rise Fellowship video</h4>
+        <p>Video introducing her work and journey as part of the India Rise Fellowship cohort.</p>
+        <a class="go" href="https://www.youtube.com/watch?v=mOFs21YA9RE" target="_blank" rel="noopener">Watch video →</a>
+      </article>
+      <article class="m" data-c="recognition">
+        <div class="outlet">Asia Women Tech</div>
+        <h4>Top 10 Asia Young Women Rising Tech Stars 2025</h4>
+        <p>Named among the ten honourees in the Rising Tech Stars category of the Asia Women Tech Leaders Awards, Singapore.</p>
+        <a class="go" href="https://asiawomentech.com/top-10-asia-young-women-rising-tech-stars-2025/" target="_blank" rel="noopener">View list →</a>
+      </article>
+      <article class="m" data-c="recognition">
+        <div class="outlet">Ooruni Foundation · Facebook</div>
+        <h4>Working Women Achiever Award 2019</h4>
+        <p>Announcement introducing her as one of the 100 achievers, recognised in the Breaking Stereotype category.</p>
+        <a class="go" href="https://www.facebook.com/oorunifoundation/posts/ooruni-proud-to-introducewwaa2019-100-achieversms-vamanie-perumalworkingwomenach/2526595634234052/" target="_blank" rel="noopener">View post →</a>
+      </article>
+      <article class="m" data-c="recognition">
+        <div class="outlet">IIT Madras · Kenyon–IITM</div>
+        <h4>Teaching fellows &amp; teaching assistants</h4>
+        <p>Listed as a teaching assistant for the Kenyon–IITM Technical and Science Writing Workshop, Department of Humanities and Social Sciences.</p>
+        <a class="go" href="https://hss.iitm.ac.in/kenyon-iitm/teaching-fellows-teaching-assistant/" target="_blank" rel="noopener">View page →</a>
+      </article>
+
+      <!-- Writing & interviews -->
+      <article class="m" data-c="writing">
+        <div class="outlet">Society of Women Engineers · India</div>
+        <h4>Smart India Hackathon 2025: where bold student ideas become national solutions</h4>
+        <p>Her article reflecting on serving as a judge for Smart India Hackathon 2025 and the student innovation she saw.</p>
+        <a class="go" href="https://swe.org/india/smart-india-hackathon-2025-where-bold-student-ideas-become-national-solutions-by-vamanie-perumal/" target="_blank" rel="noopener">Read article →</a>
+      </article>
+      <article class="m" data-c="writing">
+        <div class="outlet">Society of Women Engineers · India</div>
+        <h4>Leading with confidence: an academic reflection on women's leadership development</h4>
+        <p>Reflective piece on how women can grow into technology leadership, drawing on her panel work on the subject.</p>
+        <a class="go" href="https://swe.org/india/leading-with-confidence-an-academic-reflection-on-womens-leadership-development/" target="_blank" rel="noopener">Read article →</a>
+      </article>
+      <article class="m" data-c="writing">
+        <div class="outlet">Lifeology</div>
+        <h4>The spherical cow: an insight into science</h4>
+        <p>Science-communication blog piece on simplifying assumptions and models in science (2020).</p>
+        <a class="go" href="https://lifeology.io/blog/2020/07/27/the-spherical-cow-an-insight-into-science/" target="_blank" rel="noopener">Read article →</a>
+      </article>
+      <article class="m" data-c="writing">
+        <div class="outlet">Lotus STEMM</div>
+        <h4>Managing during a pandemic</h4>
+        <p>Feature on navigating research, work and well-being in STEMM during the COVID-19 pandemic.</p>
+        <a class="go" href="https://www.lotusstemm.org/post/managing-during-a-pandemic" target="_blank" rel="noopener">Read article →</a>
+      </article>
+      <article class="m" data-c="writing">
+        <div class="outlet">Education21</div>
+        <h4>Education feature</h4>
+        <p>Feature on her work in education and STEM creativity.</p>
+        <a class="go" href="https://education21.in/2594-2/" target="_blank" rel="noopener">Read article →</a>
+      </article>
+
+      <!-- Talks & events -->
+      <article class="m" data-c="talks">
+        <div class="outlet">EURO 2024 · Copenhagen</div>
+        <h4>33rd European Conference on Operational Research — programme</h4>
+        <p>Conference stream featuring her talk on estimating online advertising effectiveness with a coarsened exact matching framework.</p>
+        <a class="go" href="https://www.euro-online.org/euro33/program/stream/17" target="_blank" rel="noopener">View programme →</a>
+      </article>
+      <article class="m" data-c="talks">
+        <div class="outlet">IEEE HPCC / DSS 2025 · University of Exeter</div>
+        <h4>Conference programme</h4>
+        <p>Programme listing her paper on benchmarking Tamil Nadu's intra-state bus network with data envelopment analysis.</p>
+        <a class="go" href="https://hpcn.exeter.ac.uk/hpcc2025/Conference_Programme.pdf" target="_blank" rel="noopener">View programme (PDF) →</a>
+      </article>
+      <article class="m" data-c="talks">
+        <div class="outlet">Rajalakshmi Engineering College · LinkedIn</div>
+        <h4>LeadHERship Week: Empower, Achieve, Transform</h4>
+        <p>Post on her invited session for International Women's Day celebrations with the Society of Women Engineers (March 2025).</p>
+        <a class="go" href="https://www.linkedin.com/posts/rajalakshmi-engineering-college_rec-naac-rajalakshmiinstitutions-activity-7303331567156834304-QJqf" target="_blank" rel="noopener">View post →</a>
+      </article>
+      <article class="m" data-c="talks">
+        <div class="outlet">Rajalakshmi Engineering College · Facebook</div>
+        <h4>From Data to Decisions: unleashing the power of data science</h4>
+        <p>Event post on her invited talk on how data science and AI drive decision-making across industries.</p>
+        <a class="go" href="https://www.facebook.com/myrecchennai/photos/from-data-to-decisions-unleashing-the-power-of-data-science-with-ms-vamika-perum/1044929651005413/" target="_blank" rel="noopener">View post →</a>
+      </article>
+      <article class="m" data-c="talks">
+        <div class="outlet">YouTube</div>
+        <h4>Talk appearance (from 3:10)</h4>
+        <p>Recorded session featuring her, beginning at the 3:10 mark.</p>
+        <a class="go" href="https://www.youtube.com/watch?v=JNPvai9s2n8&amp;t=190s" target="_blank" rel="noopener">Watch from 3:10 →</a>
+      </article>
+      <article class="m" data-c="talks">
+        <div class="outlet">YouTube Shorts</div>
+        <h4>Short video feature</h4>
+        <p>Short-form video clip featuring her.</p>
+        <a class="go" href="https://www.youtube.com/shorts/PAm4Vn6adVE" target="_blank" rel="noopener">Watch →</a>
+      </article>
+      <article class="m" data-c="talks">
+        <div class="outlet">Instagram</div>
+        <h4>Event highlight</h4>
+        <p>Post covering one of her invited sessions.</p>
+        <a class="go" href="https://www.instagram.com/p/DFccr3gIep3/" target="_blank" rel="noopener">View post →</a>
+      </article>
+      <article class="m" data-c="talks">
+        <div class="outlet">Instagram</div>
+        <h4>Event highlight</h4>
+        <p>Post covering one of her invited sessions.</p>
+        <a class="go" href="https://www.instagram.com/p/DFuUamRMQda/" target="_blank" rel="noopener">View post →</a>
+      </article>
+      <article class="m" data-c="talks">
+        <div class="outlet">Instagram</div>
+        <h4>Event highlight</h4>
+        <p>Post covering one of her invited sessions.</p>
+        <a class="go" href="https://www.instagram.com/p/DG2ezC4x0lI/" target="_blank" rel="noopener">View post →</a>
+      </article>
+      <article class="m" data-c="talks">
+        <div class="outlet">Instagram</div>
+        <h4>Event highlight</h4>
+        <p>Post covering one of her invited sessions.</p>
+        <a class="go" href="https://www.instagram.com/p/DR_3rdAk-Bk/" target="_blank" rel="noopener">View post →</a>
+      </article>
+      <article class="m" data-c="talks">
+        <div class="outlet">Facebook</div>
+        <h4>Event photo</h4>
+        <p>Photo post from one of her talks or workshops.</p>
+        <a class="go" href="https://www.facebook.com/photo.php?fbid=743264976212038&amp;id=516616715543533&amp;set=a.516883468850191" target="_blank" rel="noopener">View post →</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== GALLERY ===================== -->
+<section id="gallery" data-panel="gallery">
+  <div class="wrap">
+    <h2>Gallery</h2>
+    <p class="sub">Moments from talks, workshops, conferences and events.</p>
+    <div class="embed">
+      <iframe loading="lazy" title="Photo gallery"
+        src="https://www.canva.com/design/DAHMuR2v0ck/x4KWGfifMjPkPORr8wDMBg/view?embed"
+        allowfullscreen allow="fullscreen"></iframe>
+    </div>
+    <p class="note" style="margin-top:14px"><a href="https://canva.link/cbcnlwsxmfmlcc6" target="_blank" rel="noopener">Open the gallery in a new tab →</a></p>
+  </div>
+</section>
+
+<!-- ===================== CONTACT ===================== -->
+<section id="contact" data-panel="contact" style="border-bottom:0">
+  <div class="wrap">
+    <h2>Contact</h2>
+    <p class="sub">Open to research collaborations, academic positions, invited talks and industry partnerships.</p>
+    <div class="grid g3">
+      <div class="card"><h4>Email</h4><p><a href="mailto:perumal.vamanie@gmail.com">perumal.vamanie@gmail.com</a></p></div>
+      <div class="card"><h4>Affiliation</h4><p>Indian Institute of Technology Madras<br>Chennai 600036, India</p></div>
+      <div class="card"><h4>Profiles</h4><p><a href="https://scholar.google.com/citations?user=tM9n07EAAAAJ&amp;hl=en" target="_blank" rel="noopener">Google Scholar</a> · <a href="https://orcid.org/0009-0002-7479-3747" target="_blank" rel="noopener">ORCID</a> · <a href="https://www.scopus.com/authid/detail.uri?authorId=59787226100" target="_blank" rel="noopener">Scopus</a> · <a href="https://www.behance.net/creasembleandco" target="_blank" rel="noopener">Behance</a></p></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="yr">2026</span> Dr. Vamanie Perumal</span>
+    <span>Last updated November 2026</span>
+  </div>
+</footer>
+
+<script>
+  // tabs (hash-based, so links like yoursite/#media work)
+  const panels = document.querySelectorAll('[data-panel]');
+  const tabs = document.querySelectorAll('[data-tab]');
+  const names = [...tabs].map(t => t.dataset.tab);
+  function show(name){
+    if(!names.includes(name)) name = 'about';
+    panels.forEach(p => p.hidden = p.dataset.panel !== name);
+    tabs.forEach(t => t.classList.toggle('on', t.dataset.tab === name));
+    window.scrollTo(0, 0);
+  }
+  window.addEventListener('hashchange', () => show(location.hash.slice(1)));
+  show(location.hash.slice(1));
+  // mobile menu
+  const btn = document.querySelector('.menu-btn'), bar = document.querySelector('.tabbar');
+  btn.addEventListener('click', () => { const o = bar.classList.toggle('open'); btn.setAttribute('aria-expanded', o); });
+  tabs.forEach(a => a.addEventListener('click', () => { bar.classList.remove('open'); btn.setAttribute('aria-expanded', false); }));
+  // media filters
+  document.querySelectorAll('.filters button').forEach(b => b.addEventListener('click', () => {
+    document.querySelectorAll('.filters button').forEach(x => x.classList.toggle('on', x === b));
+    const f = b.dataset.f;
+    document.querySelectorAll('#mediaGrid .m').forEach(m => m.hidden = !(f === 'all' || m.dataset.c === f));
+  }));
+  document.getElementById('yr').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
